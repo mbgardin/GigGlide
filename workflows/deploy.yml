@@ -1,0 +1,33 @@
+name: Deploy Vue App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Change this to 'master' if your default branch uses that name
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install and Build Client
+        run: |
+          cd client
+          npm install
+          npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: client/dist # Points to the build output inside your client folder
+          branch: gh-pages # The branch the action will create and deploy from
