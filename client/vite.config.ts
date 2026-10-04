@@ -12,6 +12,7 @@ export default defineConfig({
     tailwindcss(),
     vueDevTools(),
   ],
+  base: '/GigGlide/',
   server: {
     // API server in ../server (npm run dev there)
     proxy: { '/api': 'http://localhost:8787' },
